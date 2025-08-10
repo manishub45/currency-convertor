@@ -2,7 +2,8 @@
 
 A feature-rich and performance-optimized currency converter application built with React. This project allows users to get real-time exchange rates and includes modern features for an excellent user experience.
 
-**[Live Demo Link Here]** ![Currency Converter Screenshot](http://googleusercontent.com/file_content/12) ## 📜 Description
+**[Live Demo Link Here]** ![Currency Converter Screenshot](![currency converter Gif](https://github.com/user-attachments/assets/6847de23-852c-44cb-8991-ced7da3ff10d)
+) ## 📜 Description
 
 This is a web application that provides real-time currency conversion. It was built not just to be functional, but also to be fast, efficient, and user-friendly, incorporating several advanced frontend development techniques.
 
