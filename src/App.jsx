@@ -3,16 +3,16 @@ import { InputBox } from './Components';
 import useCurrencyInfo from './hooks/useCurrencyInfo';
 
 function App() {
-    const [amount, setAmount] = useState(1); // Default amount 1 rakha hai
+    const [amount, setAmount] = useState(1); // Set default amount to 1
     const [from, setFrom] = useState(() => localStorage.getItem("fromCurrency") || "usd");
     const [to, setTo] = useState(() => localStorage.getItem("toCurrency") || "inr");
     const [convertedAmount, setConvertedAmount] = useState(0);
-    const [themeMode, setThemeMode] = useState('light'); // Dark mode ke liye state
+    const [themeMode, setThemeMode] = useState('light'); // State for dark mode theme
 
     const { data: currencyInfo, loading, error } = useCurrencyInfo(from);
     const options = Object.keys(currencyInfo);
 
-    // FEATURE 1: Dark/Light Mode ka Logic
+    // FEATURE 1: Dark/Light Mode Logic
     const toggleTheme = () => {
         setThemeMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
     };
@@ -24,22 +24,22 @@ function App() {
     }, [themeMode]);
 
 
-    // FEATURE 2: Debouncing ka Logic
+    // FEATURE 2: Debouncing Logic
     useEffect(() => {
-        // Jab user type karna band kar dega, uske 500ms baad conversion hoga
+        // Convert 500ms after the user stops typing
         const debounceTimeout = setTimeout(() => {
             if (currencyInfo[to]) {
                 setConvertedAmount(amount * currencyInfo[to]);
             }
         }, 500);
 
-        // Agar user 500ms se pehle fir type kar de, to purana timeout clear ho jayega
+        // Clear the previous timeout if the user types again within 500ms
         return () => clearTimeout(debounceTimeout);
 
     }, [amount, from, to, currencyInfo]);
 
 
-    // FEATURE 3: useCallback se functions ko optimize karna
+    // FEATURE 3: Optimize functions with useCallback
     const swap = useCallback(() => {
         setFrom(to);
         setTo(from);
@@ -48,7 +48,7 @@ function App() {
     }, [amount, convertedAmount, to, from]);
 
 
-    // Local storage ka logic
+    // Logic for local storage
     useEffect(() => {
         localStorage.setItem("fromCurrency", from);
         localStorage.setItem("toCurrency", to);
@@ -71,9 +71,13 @@ function App() {
             <div className="w-full">
                 <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30 dark:bg-black/30">
                     
+                    {/* Show loading message while fetching data */}
                     {loading && <p className="text-black text-center text-lg dark:text-white">Loading...</p>}
+                    
+                    {/* Show error message if fetch fails */}
                     {error && <p className="text-red-200 bg-red-800 p-3 rounded-md text-center text-lg">{error}</p>}
                     
+                    {/* Show the form only when not loading and no error */}
                     {!loading && !error && (
                          <form onSubmit={(e) => e.preventDefault()}>
                             <div className="w-full mb-1">

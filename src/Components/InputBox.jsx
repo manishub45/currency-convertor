@@ -48,5 +48,5 @@ function InputBox({
     );
 }
 
-// React.memo se component ko wrap kar diya
+
 export default React.memo(InputBox);
