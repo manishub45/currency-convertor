@@ -1,0 +1,12 @@
+api link         
+
+https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/inr.json
+
+// Jab aap likhte hain:
+const result = useState({});
+
+// To `result` असल में ऐसा dikhta hai:
+// result = [ {} , function() ]
+//           ^       ^
+//           |       |-----> (Updater function, jise hum 'setData' naam dete hain)
+//           |-----> (Current value, jise hum 'data' naam dete hain)
